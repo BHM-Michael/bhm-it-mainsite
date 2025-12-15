@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | BHM-IT</title>
+  <meta name="description" content="Contact BHM-IT" />
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="nav__left">
+      <a class="logo" href="./index.html">
+        <span class="logo__mark">BHM</span><span class="logo__dash">-</span><span class="logo__mark">IT</span>
+      </a>
+      <span class="pill">Contact</span>
+    </div>
+    <nav class="nav__right">
+      <a class="btn btn--ghost" href="./index.html">Home</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h1>Send a message</h1>
+      <p class="sub">
+        This form posts to a secure endpoint and delivers directly to <strong>michael@bhm-it.com</strong>.
+      </p>
+
+      <div class="card">
+        <form id="contactForm" class="form">
+          <div class="grid2">
+            <label>
+              <span>Name</span>
+              <input name="name" required maxlength="80" autocomplete="name" />
+            </label>
+            <label>
+              <span>Email</span>
+              <input name="email" type="email" required maxlength="120" autocomplete="email" />
+            </label>
+          </div>
+
+          <label>
+            <span>Subject</span>
+            <input name="subject" required maxlength="120" />
+          </label>
+
+          <label>
+            <span>Message</span>
+            <textarea name="message" required maxlength="4000" rows="8"></textarea>
+          </label>
+
+          <!-- simple bot trap -->
+          <input class="honeypot" name="company" tabindex="-1" autocomplete="off" />
+
+          <div class="form__actions">
+            <button class="btn" type="submit" id="sendBtn">Send</button>
+            <span class="dim" id="status"></span>
+          </div>
+        </form>
+      </div>
+
+      <div class="card subtle">
+        <div class="dim">Prefer email?</div>
+        <div><a href="mailto:michael@bhm-it.com">michael@bhm-it.com</a></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // TODO: set this to your deployed Azure Function URL:
+    // e.g. https://bhmit-contact-func.azurewebsites.net/api/contact
+    const CONTACT_ENDPOINT = "REPLACE_WITH_YOUR_FUNCTION_URL";
+
+    const form = document.getElementById("contactForm");
+    const statusEl = document.getElementById("status");
+    const sendBtn = document.getElementById("sendBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      statusEl.textContent = "";
+      sendBtn.disabled = true;
+
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      // bot trap: if filled, pretend success but do nothing
+      if (data.company && data.company.trim().length > 0) {
+        statusEl.textContent = "Sent.";
+        sendBtn.disabled = false;
+        form.reset();
+        return;
+      }
+
+      try {
+        const res = await fetch(CONTACT_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: data.name,
+            email: data.email,
+            subject: data.subject,
+            message: data.message,
+            page: location.href
+          })
+        });
+
+        if (!res.ok) {
+          const txt = await res.text().catch(() => "");
+          throw new Error(txt || `Request failed (${res.status})`);
+        }
+
+        statusEl.textContent = "Message delivered.";
+        form.reset();
+      } catch (err) {
+        statusEl.textContent = "Something failed. Try again or email michael@bhm-it.com.";
+        console.error(err);
+      } finally {
+        sendBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
