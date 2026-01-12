@@ -1,179 +1,520 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BHM-IT | Engineering. Automation. Secure Systems.</title>
-  <meta name="description" content="BHM-IT builds secure, high-leverage systems: cloud architecture, automation, and privacy-first conversation intelligence (ThreadClear)." />
-  <meta name="theme-color" content="#0b1020" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHM-IT | Customer-Focused Digital Solutions</title>
+    <meta name="description" content="BHM-IT designs and delivers structured, extensible digital platforms that support meaningful engagement and long-term growth.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #1e293b;
+            --color-secondary: #334155;
+            --color-accent: #475569;
+            --color-accent-light: #64748b;
+            --color-background: #ffffff;
+            --color-background-alt: #f1f5f9;
+            --color-border: #e2e8f0;
+            --color-text: #1e293b;
+            --color-text-muted: #64748b;
+            --font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --max-width: 1100px;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+            --spacing-xl: 4rem;
+            --spacing-xxl: 6rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--color-text);
+            background-color: var(--color-background);
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Layout */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Header */
+        .header {
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            letter-spacing: -0.025em;
+        }
+
+        .logo:hover {
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .nav a {
+            font-size: 0.9375rem;
+            color: var(--color-secondary);
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        /* Hero */
+        .hero {
+            padding: var(--spacing-xxl) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .hero-content {
+            max-width: 720px;
+        }
+
+        .hero h1 {
+            font-size: 2.25rem;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -0.025em;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--color-accent-light);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.7;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-family);
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-background);
+            border: 1px solid var(--color-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-secondary);
+            border-color: var(--color-secondary);
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background-color: var(--color-background);
+            color: var(--color-primary);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-background-alt);
+            text-decoration: none;
+        }
+
+        /* Sections */
+        .section {
+            padding: var(--spacing-xxl) 0;
+        }
+
+        .section-alt {
+            background-color: var(--color-background-alt);
+        }
+
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-accent-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .service-item h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .service-item p {
+            font-size: 0.9375rem;
+            color: var(--color-accent-light);
+            line-height: 1.7;
+        }
+
+        /* Why Section */
+        .why-list {
+            list-style: none;
+            max-width: 640px;
+        }
+
+        .why-list li {
+            position: relative;
+            padding-left: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1rem;
+            color: var(--color-secondary);
+        }
+
+        .why-list li::before {
+            content: "–";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent-light);
+        }
+
+        /* Capabilities Chips */
+        .capabilities-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            list-style: none;
+        }
+
+        .capabilities-list li {
+            font-size: 0.9375rem;
+            color: var(--color-secondary);
+            background-color: var(--color-background);
+            border: 1px solid var(--color-border);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        /* Products */
+        .product-item {
+            max-width: 640px;
+        }
+
+        .product-item h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .product-item p {
+            font-size: 0.9375rem;
+            color: var(--color-accent-light);
+            line-height: 1.7;
+        }
+
+        .product-item p + p {
+            margin-top: var(--spacing-xs);
+        }
+
+        .product-link {
+            display: inline-block;
+            margin-top: var(--spacing-sm);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--color-secondary);
+        }
+
+        /* About */
+        .about-content {
+            max-width: 640px;
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            color: var(--color-secondary);
+            line-height: 1.8;
+        }
+
+        /* Contact */
+        .contact-content {
+            max-width: 640px;
+        }
+
+        .contact-content p {
+            font-size: 1rem;
+            color: var(--color-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            font-family: var(--font-family);
+            font-size: 0.9375rem;
+            padding: 0.75rem;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            background-color: var(--color-background);
+            color: var(--color-text);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            align-self: flex-start;
+        }
+
+        /* Footer */
+        .footer {
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--color-accent-light);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .footer-links a {
+            font-size: 0.875rem;
+            color: var(--color-accent-light);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .capabilities-list li {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="bg-grid" aria-hidden="true"></div>
-
-  <header class="nav">
-    <div class="nav__left">
-      <div class="logo">
-        <span class="logo__mark">BHM</span><span class="logo__dash">-</span><span class="logo__mark">IT</span>
-      </div>
-      <span class="pill">Parent Company</span>
-    </div>
-
-    <nav class="nav__right">
-      <a href="#capabilities">Capabilities</a>
-      <a href="#approach">Approach</a>
-      <a href="#stack">Stack</a>
-      <a class="btn btn--ghost" href="./contact.html">Contact</a>
-    </nav>
-  </header>
-
-  <main class="container">
-    <section class="hero">
-      <div class="hero__left">
-        <div class="kicker">SYSTEMS ENGINEERING • CLOUD • AUTOMATION</div>
-        <h1>Technical delivery with a security-first mindset.</h1>
-        <p class="sub">
-          BHM-IT designs and builds high-reliability systems: cloud platforms, data pipelines,
-          automation, and privacy-first products like <strong>ThreadClear</strong>.
-        </p>
-
-        <div class="cta">
-          <a class="btn" href="./contact.html">Start a conversation</a>
-          <a class="btn btn--ghost" href="#capabilities">See what we build</a>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">BHM-IT</a>
+            <nav class="nav">
+                <a href="#capabilities">Capabilities</a>
+                <a href="#products">Products</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
         </div>
+    </header>
 
-        <div class="badges">
-          <span class="chip">Azure</span>
-          <span class="chip">.NET</span>
-          <span class="chip">Angular</span>
-          <span class="chip">Security</span>
-          <span class="chip">Automation</span>
-          <span class="chip">AI Enablement</span>
-        </div>
-      </div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Customer-Focused Digital Solutions, Built to Scale</h1>
+                    <p>BHM-IT designs and delivers structured, extensible digital platforms that support meaningful engagement and long-term growth.</p>
+                    <div class="cta-group">
+                        <a href="#capabilities" class="btn btn-primary">Our Capabilities</a>
+                        <a href="#contact" class="btn btn-secondary">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <div class="hero__right">
-        <div class="terminal">
-          <div class="terminal__bar">
-            <span class="dot dot--r"></span>
-            <span class="dot dot--y"></span>
-            <span class="dot dot--g"></span>
-            <span class="terminal__title">bhm-it :: status</span>
-          </div>
-          <pre class="terminal__body"><code><span class="dim">$</span> whoami
-bhm-it / engineering partner
+        <section id="capabilities" class="section">
+            <div class="container">
+                <h2 class="section-title">What We Do</h2>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <h3>Digital Architecture &amp; Engineering</h3>
+                        <p>Design and implementation of well-structured, maintainable systems built for long-term scalability.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Customer Experience &amp; Engagement</h3>
+                        <p>Thoughtful, user-focused digital experiences that balance usability with technical discipline.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Modernization &amp; Advisory</h3>
+                        <p>Guidance and delivery support for modernizing legacy platforms with clarity, control, and sustainable outcomes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<span class="dim">$</span> capabilities --list
-- cloud architecture & landing zones
-- secure web apps (.NET + Angular)
-- data integration & modernization
-- automation (CI/CD, IaC, workflows)
-- conversation intelligence (ThreadClear)
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title">Why BHM-IT</h2>
+                <ul class="why-list">
+                    <li>Experience delivering in regulated and enterprise environments</li>
+                    <li>Emphasis on structure, extensibility, and long-term value</li>
+                    <li>Practical, delivery-focused approach</li>
+                    <li>Solutions designed to evolve, not be replaced</li>
+                </ul>
+            </div>
+        </section>
 
-<span class="dim">$</span> principles
-- least privilege
-- observable-by-default
-- automate the boring parts
-- ship in slices, not monuments</code></pre>
-        </div>
-      </div>
-    </section>
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Selected Capabilities</h2>
+                <ul class="capabilities-list">
+                    <li>Platform modernization &amp; sustainment</li>
+                    <li>Secure, maintainable architecture</li>
+                    <li>Data &amp; reporting (Power BI / SQL)</li>
+                    <li>Integration &amp; automation</li>
+                    <li>User-centered UX for real workflows</li>
+                    <li>Cloud-ready delivery (Azure)</li>
+                </ul>
+            </div>
+        </section>
 
-    <section id="capabilities" class="section">
-      <h2>Capabilities</h2>
-      <div class="grid3">
-        <div class="card">
-          <h3>Cloud & Platform Engineering</h3>
-          <p>Azure subscriptions, network patterns, identity boundaries, and repeatable environments.</p>
-          <ul>
-            <li>Landing zones & governance</li>
-            <li>App hosting (Functions, App Service)</li>
-            <li>Secrets, key mgmt, RBAC</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Application Delivery</h3>
-          <p>Modern web apps built for maintainability and auditability.</p>
-          <ul>
-            <li>.NET (API + services)</li>
-            <li>Angular UI systems</li>
-            <li>Validation, logging, tracing</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Automation & Integration</h3>
-          <p>Reduce manual work and increase consistency across teams and systems.</p>
-          <ul>
-            <li>CI/CD pipelines</li>
-            <li>IaC (Bicep/Terraform)</li>
-            <li>Data flows & connectors</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+        <section id="products" class="section section-alt">
+            <div class="container">
+                <h2 class="section-title">Products</h2>
+                <div class="product-item">
+                    <h3>ThreadClear</h3>
+                    <p>A privacy-first conversational intelligence product incubated and operated by BHM-IT, focused on extracting insight from communication threads without retaining sensitive content.</p>
+                    <p>Built with privacy-first principles and enterprise-ready handling.</p>
+                    <a href="https://threadclear.com" class="product-link" target="_blank" rel="noopener noreferrer">Learn more →</a>
+                </div>
+            </div>
+        </section>
 
-    <section id="approach" class="section">
-      <h2>Approach</h2>
-      <div class="grid2">
-        <div class="card">
-          <h3>Design for constraints</h3>
-          <p>
-            Regulated environments, procurement realities, legacy dependencies—handled up front.
-            You get a plan that survives contact with the real world.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Deliver in slices</h3>
-          <p>
-            Thin vertical increments: measurable value, fast feedback, clear operational posture.
-            No “big bang” launches.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Security as a default</h3>
-          <p>
-            Threat-aware decisions, least privilege, secure secrets, and safe logging from day one.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Observable systems</h3>
-          <p>
-            If you can’t see it, you can’t run it. Metrics, structured logs, and traces are part of “done.”
-          </p>
-        </div>
-      </div>
-    </section>
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About</h2>
+                <div class="about-content">
+                    <p>BHM-IT is a digital services firm focused on building systems that serve users while remaining structurally sound and adaptable over time.</p>
+                </div>
+            </div>
+        </section>
 
-    <section id="stack" class="section">
-      <h2>Preferred stack</h2>
-      <div class="card">
-        <div class="stack">
-          <div><span class="label">Frontend:</span> Angular, TypeScript, Bootstrap/Material</div>
-          <div><span class="label">Backend:</span> .NET 8, REST APIs, background workers</div>
-          <div><span class="label">Cloud:</span> Azure (Functions, App Service, Storage, Key Vault)</div>
-          <div><span class="label">DevOps:</span> GitHub Actions / Azure DevOps, IaC</div>
-          <div><span class="label">Product:</span> ThreadClear (privacy-first conversation intelligence)</div>
-        </div>
-      </div>
-    </section>
+        <section id="contact" class="section section-alt">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                <div class="contact-content">
+                    <p>For inquiries, reach us at <a href="mailto:contact@bhm-it.com">contact@bhm-it.com</a></p>
+                    <form class="contact-form" action="https://formsubmit.co/contact@bhm-it.com" method="POST">
+                        <input type="text" name="name" placeholder="Name" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <textarea name="message" placeholder="Message" required></textarea>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer class="footer">
-      <div class="footer__left">
-        <div class="logo small"><span class="logo__mark">BHM</span><span class="logo__dash">-</span><span class="logo__mark">IT</span></div>
-        <div class="dim">© <span id="y"></span> BHM-IT. Built for clarity.</div>
-      </div>
-      <div class="footer__right">
-        <a href="./contact.html">Contact</a>
-      </div>
+        <div class="container footer-inner">
+            <div class="footer-text">© <span id="year"></span> BHM-IT. All rights reserved.</div>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/company/bhm-it" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+        </div>
     </footer>
-  </main>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
