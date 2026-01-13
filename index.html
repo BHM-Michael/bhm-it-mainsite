@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo2.png">
     <style>
         :root {
             --color-primary: #1e293b;
@@ -77,14 +78,25 @@
         }
 
         .logo {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--color-primary);
-            letter-spacing: -0.025em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .logo:hover {
             text-decoration: none;
+        }
+
+        .logo-icon {
+            height: 24px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            letter-spacing: -0.025em;
         }
 
         .nav {
@@ -397,7 +409,7 @@
 <body>
     <header class="header">
         <div class="container header-inner">
-            <a href="#" class="logo">BHM-IT</a>
+            <a href="#" class="logo"><img src="logo2.png" alt="" class="logo-icon"><span class="logo-text">BHM-IT</span></a>
             <nav class="nav">
                 <a href="#capabilities">Capabilities</a>
                 <a href="#products">Products</a>
